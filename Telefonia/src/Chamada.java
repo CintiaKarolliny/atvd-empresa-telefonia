@@ -1,12 +1,8 @@
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class Chamada {
+
     private Date data;
     private Integer duracao;
 
@@ -26,11 +22,9 @@ public class Chamada {
 
     @Override
     public String toString() {
-        return "Chamada [data=" + data + ", duracao=" + duracao + "]";
+        SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+        return "Chamada: data = " + dataFormatada.format(data) + ", duração = " + duracao + " minutos";
     }
-
-
-
 
     @Override
     public int hashCode() {
@@ -45,35 +39,27 @@ public class Chamada {
             return false;
         if (getClass() != obj.getClass())
             return false;
+
         Chamada other = (Chamada) obj;
         return Objects.equals(data, other.data) && Objects.equals(duracao, other.duracao);
     }
 
     public static void main(String[] args) {
-        Calendar ca = Calendar.getInstance();
-        ca.set(1999,01,01);
-        Date d = ca.getTime();
-        Chamada c = new Chamada(d, 50);
-        Chamada c2 = new Chamada(d, 50);
+        GregorianCalendar ca = new GregorianCalendar();
+        ca.set(2018, GregorianCalendar.DECEMBER,12);
 
+        GregorianCalendar ca2 = new GregorianCalendar();
+        ca2.set(2020,GregorianCalendar.APRIL,3);
 
+        Chamada chamada1 = new Chamada(ca.getTime(), 50);
+        Chamada chamada2 = new Chamada(ca2.getTime(), 30);
 
-        List<Chamada> chamadas = new ArrayList<>();
-        chamadas.add(c);
-        chamadas.add(c);
+        Set<Chamada> chamadas = new HashSet<>();
 
-        Set cm = new HashSet();
+        chamadas.add(chamada1);
+        chamadas.add(chamada2);
 
-        cm.add(c);
-        cm.add(c);
-
-        System.out.println(cm);
-        System.out.println();
-        System.out.println(chamadas);
-        //System.out.println(c);
-
-
+        System.out.print(chamadas);
 
     }
-
 }
