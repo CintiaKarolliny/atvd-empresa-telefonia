@@ -1,45 +1,46 @@
 ﻿import java.util.*;
 
-public class PosPago extends Assinante{
+public class PosPago extends Assinante {
 
     private float assinatura;
 
-    public PosPago(long cpf, String nome, Integer numero, float assinatura){
-        super(cpf, nome, numero);
+    public PosPago(long cpf, String nome, Integer numero, Integer numChamadas, float assinatura) {
+        super(cpf, nome, numero, numChamadas);
         this.assinatura = assinatura;
     }
 
-    public void fazerChamada(Date data, Integer duracao){
+    public void fazerChamada(Date data, Integer duracao) {
 
-        this.assinatura = duracao * 1.04f;
+        if (numChamadas > 0) {
 
-        this.chamadas[this.numChamadas -1] = new Chamada(data, duracao);
+            this.assinatura += duracao * 1.04f;
 
-        this.numChamadas = this.numChamadas - 1;
+            this.chamadas[this.numChamadas - 1] = new Chamada(data, duracao);
 
-        /*@Override
-        public boolean equals(Object obj) {
-            if (this == obj)
-                return true;
-            if (obj == null)
-                return false;
-            if (getClass() != obj.getClass())
-                return false;
+            this.numChamadas = this.numChamadas - 1;
 
-            Chamada other = (Chamada) obj;
-            return Objects.equals(data, other.data) && Objects.equals(duracao, other.duracao);
-        }*/
-
+            System.out.println("\nChamada realizada!\nQuantidade de chamadas restantes: " + this.numChamadas);
+        } else {
+            System.out.println("\nNão é possível fazer mais chamadas!");
+        }
     }
 
-    public String imprimirFatura(int mes){
+    public void mostrarChamadas() {
+        Integer i = 0;
+        Integer cont = 1;
 
-        //  este método deve ser utilizado para imprimir a fatura de
-        //um assinante pós-pago em um mês dado por seu argumento. O método deve imprimir os
-        //dados do assinante (CPF, nome e número do telefone), a data, duração e valor de suas
-        //chamadas feitas no mês.Deve imprimirtambém o valortotal da fatura, que é a soma da
-        //assinatura (atributo assinatura) com o custo de todas as ligações do mês.
-        return "CPF: " + cpf + "\nNome: "+ nome + "\nNúmero de Telefone: " + numero;
-
+        while (i < chamadas.length) {
+            System.out.println("\n" + cont + "ª chamada: " + this.chamadas[i]);
+            i++;
+            cont++;
+        }
     }
+
+    /*public String imprimirFatura(int mes) {
+
+        if (mes == getmesDataFormatada() + 1) {
+            return "CPF: " + cpf + "\nNome: " + nome + "\nNúmero de Telefone: " + numero + "Chamadas: " + chamadas + "Total pago: " + assinatura;
+        }
+        return "Não há faturas correspondentes a este mês!";
+    }*/
 }
