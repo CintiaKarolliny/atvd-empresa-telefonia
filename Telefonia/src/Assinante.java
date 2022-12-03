@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class Assinante {
+public abstract class Assinante {
 	protected long cpf;
 	protected String nome;
 	protected Integer numero;
@@ -67,7 +67,7 @@ public class Assinante {
 
 	@Override
 	public String toString() {
-    	return cpf + nome + numero + numChamadas + Arrays.toString(chamadas);
+    	return "CPF: " cpf + "/nNome: " + nome + "/nNúmero: " + numero + "/nNúmero de chamadas: " + numChamadas + Arrays.toString(chamadas);
 	}
 
 	/* public static void main(String[] args) {
