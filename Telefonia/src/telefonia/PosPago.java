@@ -1,10 +1,12 @@
-﻿import java.util.*;
+package telefonia;
+
+import java.util.*;
 
 public class PosPago extends Assinante {
 
-    private float assinatura;
+    protected float assinatura;
 
-    public PosPago(long cpf, String nome, Integer numero, Integer numChamadas, float assinatura) {
+    public PosPago(long cpf, String nome, long numero, Integer numChamadas, float assinatura) {
         super(cpf, nome, numero, numChamadas);
         this.assinatura = assinatura;
     }
@@ -26,21 +28,52 @@ public class PosPago extends Assinante {
     }
 
     public void mostrarChamadas() {
-        Integer i = 0;
-        Integer cont = 1;
+        int i = 0;
 
         while (i < chamadas.length) {
-            System.out.println("\n" + cont + "ª chamada: " + this.chamadas[i]);
-            i++;
-            cont++;
+            if (chamadas[i] == null) {
+                i++;
+            } else {
+                System.out.println("\n" + this.chamadas[i].toString());
+                i++;
+            }
         }
     }
 
-    /*public String imprimirFatura(int mes) {
+    public void imprimirFatura(int mes) {
 
-        if (mes == getmesDataFormatada() + 1) {
-            return "CPF: " + cpf + "\nNome: " + nome + "\nNúmero de Telefone: " + numero + "Chamadas: " + chamadas + "Total pago: " + assinatura;
+        GregorianCalendar dataCal = new GregorianCalendar();
+
+        int i = 0;
+        float totalChamada = 0;
+
+        System.out.println("\nChamadas pós-pago: ");
+
+        while (i < this.chamadas.length) {
+
+            if (this.chamadas[i] != null) {
+                dataCal.setTime(this.chamadas[i].getData());
+
+                int mesCal = dataCal.get(Calendar.MONTH);
+
+                if (mes == mesCal + 1) {
+
+                    int duracao = this.chamadas[i].getDuracao();
+
+                    totalChamada += Math.round((duracao * 1.04f)*100.0)/100.0;
+
+                    System.out.println(this.chamadas[i].toString() + "\nValor da chamada: R$" + Math.round((duracao * 1.04f)*100.0)/100.0);
+
+                    i++;
+                } else {
+                    i++;
+                }
+            } else {
+                System.out.println("\nNão há chamadas para este mês");
+                i++;
+            }
         }
-        return "Não há faturas correspondentes a este mês!";
-    }*/
+
+        System.out.println("\nTotal da assinatura: R$" + this.assinatura + "\nFatura total: R$" + totalChamada + "\n");
+    }
 }
