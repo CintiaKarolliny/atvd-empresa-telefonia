@@ -1,3 +1,5 @@
+package telefonia;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -23,7 +25,7 @@ public class Chamada {
     @Override
     public String toString() {
         SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
-        return "Chamada: data = " + dataFormatada.format(data) + ", duração = " + duracao + " minutos";
+        return "* Chamada: data = " + dataFormatada.format(data) + ", duração = " + duracao + " minutos";
     }
 
     @Override
@@ -42,24 +44,5 @@ public class Chamada {
 
         Chamada other = (Chamada) obj;
         return Objects.equals(data, other.data) && Objects.equals(duracao, other.duracao);
-    }
-
-    public static void main(String[] args) {
-        GregorianCalendar ca = new GregorianCalendar();
-        ca.set(2018, GregorianCalendar.DECEMBER,12);
-
-        GregorianCalendar ca2 = new GregorianCalendar();
-        ca2.set(2020,GregorianCalendar.APRIL,3);
-
-        Chamada chamada1 = new Chamada(ca.getTime(), 50);
-        Chamada chamada2 = new Chamada(ca2.getTime(), 30);
-
-        Set<Chamada> chamadas = new HashSet<>();
-
-        chamadas.add(chamada1);
-        chamadas.add(chamada2);
-
-        System.out.print(chamadas);
-
     }
 }

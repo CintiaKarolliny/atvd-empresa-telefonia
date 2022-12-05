@@ -1,8 +1,12 @@
+package telefonia;
+
 public abstract class Assinante {
 	private long cpf;
 	private String nome;
 	private long numero;
+
 	protected Chamada[] chamadas;
+
 	protected Integer numChamadas;
 
 	public Assinante(long cpf, String nome, long numero, Integer numChamadas) {
@@ -14,7 +18,6 @@ public abstract class Assinante {
 		this.chamadas = new Chamada[numChamadas];
 		this.numChamadas = numChamadas;
 
-		Chamada[] chamadas = new Chamada[numChamadas];
 	}
 	
 	public long getCpf() {
@@ -25,4 +28,6 @@ public abstract class Assinante {
 	public String toString() {
     	return "CPF: " + cpf + " | Nome: " + nome + " | Telefone: " + numero;
 	}
+
+
 }
