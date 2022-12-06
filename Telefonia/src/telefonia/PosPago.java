@@ -69,11 +69,10 @@ public class PosPago extends Assinante {
                     i++;
                 }
             } else {
-                System.out.println("\nNão há chamadas para este mês");
                 i++;
             }
         }
 
-        System.out.println("\nTotal da assinatura: R$" + this.assinatura + "\nFatura total: R$" + totalChamada + "\n");
+        System.out.println("\nTotal da assinatura: R$" + Math.round((this.assinatura*100.0)/100.0) + "\nFatura total: R$" + Math.round((totalChamada*100.0)/100.0) + "\n");
     }
 }
