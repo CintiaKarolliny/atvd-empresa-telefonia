@@ -1,6 +1,6 @@
 package telefonia;
 
-import java.sql.Date;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 
 public class Recarga {
@@ -12,23 +12,18 @@ public class Recarga {
 		this.valor = valor;
 		
 	}
-	
-	public Date getDate() {
+
+	public Date getData() {
 		return data;
 	}
-	
+
 	public float getValor() {
 		return valor;
 	}
-	
+
 	public String toString() {
 		SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
-		return dataFormatada.format(data) + valor;
-	}
-	
-
-	public void main(String[] args) {
-		Recarga teste = new Recarga(data, valor);
+		return "* Recarga: data: " + dataFormatada.format(data) + ", valor: " + valor;
 	}
 
 }
